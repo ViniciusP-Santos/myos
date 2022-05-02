@@ -24,8 +24,9 @@ import grafico from "../assets/images/grafico.svg";
 import Logo from "../assets/images/Logo.svg";
 import { FcGoogle } from "react-icons/fc";
 import React from "react";
+import { useAuth } from "../hooks/useAuth";
 
-type CreateArticleForm = {
+type LoginEmailPassword = {
   title: string;
   newsSite: string;
   summary: string;
@@ -35,6 +36,17 @@ type CreateArticleForm = {
 
 export function Auth() {
   const history = useHistory();
+
+  const { user, signInWithGoogle } = useAuth();
+
+  async function handleLoginGoogle() {
+    if (!user) {
+      await signInWithGoogle();
+    }
+    history.push("/home");
+  }
+
+  //Const para Forms
   const {
     handleSubmit,
     register,
@@ -42,8 +54,8 @@ export function Auth() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (values: CreateArticleForm) => {
-    alert("Foi");
+  const onSubmit = (values: LoginEmailPassword) => {
+    alert("Login Sucess");
     history.push("/home");
   };
 
@@ -74,7 +86,6 @@ export function Auth() {
       </Stack>
 
       {/*--Aqui começa o lado direito--*/}
-
       <Stack
         bg="white"
         height="100vh"
@@ -101,7 +112,6 @@ export function Auth() {
             leftIcon={<FcGoogle size="35" />}
             bg="white"
             color="black"
-            type="submit"
             border="1px solid #a8a8b3"
             borderRadius="50px"
             margin="5px"
@@ -110,16 +120,18 @@ export function Auth() {
             textDecoration="none"
             fontStyle="none"
             textTransform="none"
+            fontWeight="light"
+            onClick={handleLoginGoogle}
           >
             Log in with Google
           </Button>
           <Box margin="15px" color="#a8a8b3">
             or Log in with your email
           </Box>
-          <FormControl isInvalid={errors.title}>
+          <FormControl isInvalid={errors.email}>
             <Input
-              id="title"
-              {...register("title", {
+              id="email"
+              {...register("email", {
                 required: "Campo obrigatório",
               })}
               borderRadius="50px"
@@ -128,27 +140,16 @@ export function Auth() {
               h="50px"
             />
             <FormErrorMessage>
-              {errors.title && errors.title.message}
+              {errors.email && errors.email.message}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.newsSite} mt="2">
-            {/* <Input
-              id="newsSite"
-              {...register("newsSite", {
-                required: "Campo obrigatório",
-              })}
-              borderRadius="50px"
-              placeholder="Password"
-              margin="5px"
-              h="50px"
-              type="password"
-            /> */}
+          <FormControl isInvalid={errors.password} mt="2">
             <InputGroup size="md">
               <Input
                 type={show ? "text" : "password"}
                 placeholder="Password"
-                id="newsSite"
-                {...register("newsSite", {
+                id="password"
+                {...register("password", {
                   required: "Campo obrigatório",
                 })}
                 borderRadius="50px"
@@ -162,7 +163,7 @@ export function Auth() {
               </InputRightElement>
             </InputGroup>
             <FormErrorMessage>
-              {errors.newsSite && errors.newsSite.message}
+              {errors.password && errors.password.message}
             </FormErrorMessage>
           </FormControl>
           <Button
@@ -179,15 +180,15 @@ export function Auth() {
           >
             Log In
           </Button>
-          <Box margin="15px">
-            <Link color="#058CE6" textDecoration="none">
-              Forgot password?
-            </Link>
-          </Box>
-          <Text margin="30px">
-            Don't have an account? <InitialFocus />
-          </Text>
         </form>
+        <Box margin="15px">
+          <Link color="#058CE6" textDecoration="none">
+            Forgot password?
+          </Link>
+        </Box>
+        <Text marginTop="90px">
+          Don't have an account? <InitialFocus />
+        </Text>
       </Stack>
     </SimpleGrid>
   );
