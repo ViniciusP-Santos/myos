@@ -2,7 +2,7 @@
 
 ![MyOs](https://i.imgur.com/dX1yk8N.png?1)
 
-<h3 align="center">O MYOS é um sistema de gerenciamento de pedidos de serviços e finanças desenvolvido para o micro empreendedor individual. O Sistema permite o cadastro de uma nova empresa, cadastro de produtos e serviços, cadastro de clientes e equipamentos. E com essas informações o sistema gera pedidos de serviço personalizado!</h3>
+<p align="center">O MYOS é um sistema de gerenciamento de pedidos de serviços e finanças desenvolvido para o micro empreendedor individual. O Sistema permite o cadastro de uma nova empresa, cadastro de produtos e serviços, cadastro de clientes e equipamentos. E com essas informações o sistema gera pedidos de serviço personalizado!</p>
 
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
